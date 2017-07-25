@@ -1,65 +1,28 @@
-import re
+n = int(input())
+max = '2014/09/06'
+min = '1814/09/06'
+maxday = min
+minday = max
 
-N = int(input())
-name = []
-year = {}
-month = {}
-day = {}
-for i in range(N):
-    tmp = input().split(' ')
-    name.append(tmp[0])
-    #  tmp2 = tmp[1]
-    ObjectMatch = re.match(r'\d{4}\/\d{1,2}\/\d{1,2}',tmp[1])
-    print(ObjectMatch.group(1))
-    year[tmp[0]] = ObjectMatch.group(1)
-    month[tmp[0]] = ObjectMatch.group(2)
-    day[tmp[0]] = ObjectMatch.group(3)
+sum = 0
+for i in range(n):
+    str = input().split(' ')
+    date = str[1]
+    if min <= date <= max:
+        sum += 1
+        if date >= maxday:
+            maxday = date  # 实际上日期越大年龄越小
+                           # 代码中maxday指的概念是生日的最大日期
+            mindayname = str[0]
 
-max_age_year = 0
-max_age_month = 0
-max_age_day = 0
+        if date <= minday:
+            minday = date
+            maxdayname = str[0]
 
-min_age_year = int(year[name[0]])
-min_age_month = int(month[name[0]])
-min_age_day = int(day[name[0]])
-for k in name:
-    age_year = 2014 - int(year[k])
-    age_month = 9 - int(month[k])
-    age_day = 6 - int(day[k])
-    if age_year >= 200 or age_year < 0:
-        name.remove(k)
-        break
-    #  寻找最年长的人
-    if age_year > max_age_year:
-        max_age_year = age_year
-        max_age_month = age_month
-        max_age_day = age_day
-        max_age_name = k
-    elif age_year == max_age_year:
-        if age_month > max_age_month:
-            max_age_month = age_month
-            max_age_day = age_day
-            max_age_name = k
-        elif age_month == max_age_month:
-            if age_day > max_age_day:
-                max_age_day = age_day
-                max_age_name = k
+if sum!=0 :
+    print(sum,maxdayname,mindayname)
+else:
+    print('0')
 
-    #  寻找最年轻的人
-    if age_year < min_age_year:
-        min_age_year = age_year
-        min_age_month = age_month
-        min_age_day = age_day
-        min_age_name = k
-    elif age_year == min_age_year:
-        if age_month < min_age_month:
-            min_age_month = age_month
-            min_age_day = age_day
-            min_age_name = k
-        elif age_month == min_age_month:
-            if age_day < min_age_day:
-                min_age_day = age_day
-                min_age_name = k
-
-    print(len(name),' ',max_age_name,' ',min_age_name)
-
+  # 思路可以借鉴,但无法解决最后一个测试点,猜测最后一个测试点为超大数据
+  #  python字符串可以直接比较
