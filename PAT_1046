@@ -1,0 +1,15 @@
+n = int(input())
+jia_cnt = 0
+yi_cnt = 0
+for i in range(n):
+  tmp = input().split(' ')
+  sum = int(tmp[0]) + int(tmp[2])
+  jia = int(tmp[1])
+  yi = int(tmp[3])
+  if sum == jia and sum != yi:
+    yi_cnt = yi_cnt + 1
+  elif sum == yi and sum != jia:
+    jia_cnt =jia_cnt + 1
+    
+    
+print(jia_cnt,yi_cnt)
